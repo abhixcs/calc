@@ -12,7 +12,7 @@
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            background: #000000; 
+            background: #1a1a1a; 
             color: #ffffff; 
             margin: 0; 
             overflow: hidden; /* Prevent Scrolling */
@@ -29,27 +29,37 @@
             background: rgba(255, 255, 255, 0.05); 
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-y: auto; /* Enable scrolling for the container */
         }
         input {
             width: 100%; 
-            padding: 12px; 
+            padding: 14px; 
             font-size: 16px; 
             border: 1px solid rgba(255, 255, 255, 0.2); 
-            background: #111; 
+            background: #222; 
             color: #fff; 
             border-radius: 6px; 
             text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+        input:focus {
+            border-color: #4c9aff;
+            background: #333;
         }
         button {
             width: 100%; 
             padding: 14px; 
             font-size: 18px; 
             font-weight: bold; 
-            background: #fff; 
-            color: #000; 
+            background: #4c9aff; 
+            color: #fff; 
             border: none; 
             border-radius: 6px; 
             cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+        button:hover {
+            background: #358cd8;
         }
         .grid {
             display: grid; 
@@ -58,14 +68,29 @@
         }
         .result-box {
             padding: 12px; 
-            background: #111; 
+            background: #222; 
             border-radius: 6px; 
             text-align: center; 
             font-size: 18px; 
             font-weight: bold; 
             border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease-in-out;
         }
-        @media (max-width: 375px) { /* Adjustments for smaller screens */
+        .result-box:hover {
+            background: #333;
+        }
+        .heading {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .subheading {
+            text-align: center;
+            font-size: 14px;
+            color: #bbbbbb;
+        }
+        @media (max-width: 375px) {
             input, button { font-size: 14px; padding: 10px; }
             .result-box { font-size: 16px; padding: 10px; }
         }
@@ -74,9 +99,9 @@
 <body>
 
     <div class="container">
-        <h2 class="text-center text-lg font-semibold">Unit Calculator</h2>
+        <h2 class="heading">Unit Calculator</h2>
 
-        <div class="space-y-2">
+        <div class="space-y-3">
             <input type="number" id="totalAmount" placeholder="Total Amount">
             <input type="number" id="priceA1" placeholder="Price of A1">
             <input type="number" id="priceA2" placeholder="Price of A2">
@@ -85,8 +110,8 @@
 
         <button onclick="calculate()">Calculate</button>
 
-        <div>
-            <h3 class="text-center text-gray-400 text-sm">Units You Can Buy</h3>
+        <div class="mt-6">
+            <h3 class="subheading">Units You Can Buy</h3>
             <div class="grid">
                 <div class="result-box">
                     <p class="text-xs text-gray-400">A1 (55%)</p>
