@@ -6,49 +6,99 @@
     <title>Mobile Unit Calculator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'IBM Plex Mono', monospace; }
-        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
-        html, body { height: 100%; overflow: hidden; } /* Prevent Scrolling */
+        body { 
+            font-family: 'IBM Plex Mono', monospace; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: #000000; 
+            color: #ffffff; 
+            margin: 0; 
+            overflow: hidden; /* Prevent Scrolling */
+        }
+        .container {
+            width: 95%; 
+            max-width: 400px; 
+            height: 90vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            padding: 20px; 
+            border-radius: 10px; 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        input {
+            width: 100%; 
+            padding: 12px; 
+            font-size: 16px; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            background: #111; 
+            color: #fff; 
+            border-radius: 6px; 
+            text-align: center;
+        }
+        button {
+            width: 100%; 
+            padding: 14px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            background: #fff; 
+            color: #000; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer;
+        }
+        .grid {
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px;
+        }
+        .result-box {
+            padding: 12px; 
+            background: #111; 
+            border-radius: 6px; 
+            text-align: center; 
+            font-size: 18px; 
+            font-weight: bold; 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        @media (max-width: 375px) { /* Adjustments for smaller screens */
+            input, button { font-size: 14px; padding: 10px; }
+            .result-box { font-size: 16px; padding: 10px; }
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-black text-white flex justify-center items-center h-screen">
+<body>
 
-    <div class="w-full max-w-sm glass rounded-xl p-5 border border-gray-700 shadow-lg flex flex-col justify-between h-[90vh]">
-        <h2 class="text-lg font-semibold text-center">Unit Calculator</h2>
+    <div class="container">
+        <h2 class="text-center text-lg font-semibold">Unit Calculator</h2>
 
-        <!-- Input Fields -->
         <div class="space-y-2">
-            <input type="number" id="totalAmount" placeholder="Total Amount"
-                   class="w-full p-3 rounded-md bg-gray-900 text-white text-sm text-center border border-gray-600 focus:ring-2 focus:ring-gray-500 outline-none">
-            <input type="number" id="priceA1" placeholder="Price of A1"
-                   class="w-full p-3 rounded-md bg-gray-900 text-white text-sm text-center border border-gray-600 focus:ring-2 focus:ring-gray-500 outline-none">
-            <input type="number" id="priceA2" placeholder="Price of A2"
-                   class="w-full p-3 rounded-md bg-gray-900 text-white text-sm text-center border border-gray-600 focus:ring-2 focus:ring-gray-500 outline-none">
-            <input type="number" id="priceA3" placeholder="Price of A3"
-                   class="w-full p-3 rounded-md bg-gray-900 text-white text-sm text-center border border-gray-600 focus:ring-2 focus:ring-gray-500 outline-none">
+            <input type="number" id="totalAmount" placeholder="Total Amount">
+            <input type="number" id="priceA1" placeholder="Price of A1">
+            <input type="number" id="priceA2" placeholder="Price of A2">
+            <input type="number" id="priceA3" placeholder="Price of A3">
         </div>
 
-        <button onclick="calculate()" 
-                class="w-full mt-2 bg-white text-black py-2 rounded-lg text-lg font-semibold hover:bg-gray-300 transition">
-            Calculate
-        </button>
+        <button onclick="calculate()">Calculate</button>
 
-        <!-- Results -->
-        <div class="mt-2">
-            <h3 class="text-xs text-gray-400 text-center mb-1">Units You Can Buy</h3>
-            <div class="grid grid-cols-3 gap-2 text-center">
-                <div class="p-2 bg-gray-900 rounded-lg border border-gray-700">
+        <div>
+            <h3 class="text-center text-gray-400 text-sm">Units You Can Buy</h3>
+            <div class="grid">
+                <div class="result-box">
                     <p class="text-xs text-gray-400">A1 (55%)</p>
-                    <p class="text-xl font-bold" id="unitsA1">0</p>
+                    <p id="unitsA1">0</p>
                 </div>
-                <div class="p-2 bg-gray-900 rounded-lg border border-gray-700">
+                <div class="result-box">
                     <p class="text-xs text-gray-400">A2 (30%)</p>
-                    <p class="text-xl font-bold" id="unitsA2">0</p>
+                    <p id="unitsA2">0</p>
                 </div>
-                <div class="p-2 bg-gray-900 rounded-lg border border-gray-700">
+                <div class="result-box">
                     <p class="text-xs text-gray-400">A3 (15%)</p>
-                    <p class="text-xl font-bold" id="unitsA3">0</p>
+                    <p id="unitsA3">0</p>
                 </div>
             </div>
         </div>
