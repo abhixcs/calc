@@ -27,7 +27,7 @@
         .container {
             width: 100%;
             height: 100vh;
-            padding: 12px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
         }
@@ -38,35 +38,38 @@
             text-align: center;
             font-weight: bold;
             color: #ffffff;
-            margin: 5px 0;
+            margin: 10px 0;
+            padding: 5px;
         }
 
         /* Form Section */
         .form-section {
-            margin: 5px 0;
+            margin: 8px 0;
+            padding: 5px;
         }
 
         /* Input row layout */
         .input-row {
             display: flex;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            padding: 3px 0;
         }
 
         .input-label {
-            width: 38%;
-            font-size: 12px;
+            width: 40%;
+            font-size: 13px;
             color: #bbbbbb;
-            padding-right: 8px;
+            padding: 0 10px 0 5px;
         }
 
         /* Input Fields */
         input {
-            width: 62%;
-            padding: 8px 10px;
-            height: 36px;
+            width: 60%;
+            padding: 10px 12px;
+            height: 40px;
             font-size: 14px;
-            border-radius: 6px;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: #222;
             color: #fff;
@@ -81,19 +84,23 @@
         }
 
         /* Button */
+        .calc-button-container {
+            padding: 5px;
+            margin: 5px 0;
+        }
+
         .calc-button {
             width: 100%;
-            padding: 10px;
-            height: 40px;
+            padding: 12px;
+            height: 44px;
             font-size: 16px;
             background: #4c9aff;
             color: #fff;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.2s ease;
-            margin: 8px 0;
             box-shadow: 0 2px 6px rgba(76, 154, 255, 0.3);
             -webkit-appearance: none;
         }
@@ -105,41 +112,46 @@
 
         /* Results Section */
         .results-section {
-            margin-top: 8px;
+            margin-top: 10px;
+            padding: 5px;
         }
 
         .subheading {
-            font-size: 14px;
+            font-size: 15px;
             color: #bbbbbb;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            padding: 5px;
             text-align: center;
         }
 
         .results-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            gap: 10px;
             width: 100%;
+            padding: 3px;
         }
 
         .result-box {
-            padding: 8px 5px;
+            padding: 10px 8px;
             background: #333;
-            border-radius: 6px;
+            border-radius: 8px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .result-label {
-            font-size: 10px;
+            font-size: 11px;
             color: #bbbbbb;
-            margin-bottom: 2px;
+            margin-bottom: 5px;
+            padding: 2px;
         }
 
         .result-value {
             font-size: 18px;
             font-weight: bold;
             color: #fff;
+            padding: 2px;
         }
 
         /* Input number styling */
@@ -155,23 +167,31 @@
         
         /* Compact layout for very small screens */
         @media (max-height: 500px) {
+            .container {
+                padding: 10px;
+            }
+            
             .heading {
                 font-size: 18px;
-                margin: 2px 0;
+                margin: 5px 0;
             }
             
             .input-row {
-                margin-bottom: 5px;
+                margin-bottom: 8px;
             }
             
             input {
-                height: 30px;
-                padding: 5px 8px;
+                height: 36px;
+                padding: 8px 10px;
             }
             
             .calc-button {
-                height: 32px;
-                margin: 5px 0;
+                height: 36px;
+                padding: 8px;
+            }
+            
+            .result-box {
+                padding: 8px 5px;
             }
             
             .result-value {
@@ -207,7 +227,9 @@
             </div>
         </div>
 
-        <button class="calc-button" id="calculateButton">CALCULATE</button>
+        <div class="calc-button-container">
+            <button class="calc-button" id="calculateButton">CALCULATE</button>
+        </div>
 
         <div class="results-section">
             <h3 class="subheading">Units You Can Buy</h3>
