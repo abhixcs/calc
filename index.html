@@ -14,11 +14,11 @@
         }
         
         body, html {
-            height: 100%;
+            height: 100vh;
             font-family: 'IBM Plex Mono', monospace;
             background: #121212;
             color: #fff;
-            overflow-x: hidden;
+            overflow: hidden;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
         }
@@ -26,50 +26,51 @@
         /* Container styles */
         .container {
             width: 100%;
-            min-height: 100%;
-            padding: 20px;
+            height: 100vh;
+            padding: 12px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
         }
 
         /* Title */
         .heading {
-            font-size: 28px;
+            font-size: 22px;
             text-align: center;
             font-weight: bold;
             color: #ffffff;
-            margin: 10px 0 20px;
+            margin: 5px 0;
         }
 
-        /* Form Group */
-        .form-group {
-            margin-bottom: 12px;
-            width: 100%;
+        /* Form Section */
+        .form-section {
+            margin: 5px 0;
         }
 
-        .form-label {
-            display: block;
-            font-size: 14px;
+        /* Input row layout */
+        .input-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .input-label {
+            width: 38%;
+            font-size: 12px;
             color: #bbbbbb;
-            margin-bottom: 6px;
+            padding-right: 8px;
         }
 
-        /* Input Fields with floating labels */
-        .input-container {
-            position: relative;
-            margin-bottom: 16px;
-        }
-
+        /* Input Fields */
         input {
-            width: 100%;
-            padding: 16px;
-            font-size: 16px;
-            border-radius: 12px;
+            width: 62%;
+            padding: 8px 10px;
+            height: 36px;
+            font-size: 14px;
+            border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: #222;
             color: #fff;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             -webkit-appearance: none;
         }
 
@@ -82,66 +83,61 @@
         /* Button */
         .calc-button {
             width: 100%;
-            padding: 18px;
-            font-size: 18px;
+            padding: 10px;
+            height: 40px;
+            font-size: 16px;
             background: #4c9aff;
             color: #fff;
             border: none;
-            border-radius: 12px;
+            border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s ease;
-            margin: 10px 0 20px;
-            box-shadow: 0 4px 12px rgba(76, 154, 255, 0.3);
+            transition: background 0.2s ease;
+            margin: 8px 0;
+            box-shadow: 0 2px 6px rgba(76, 154, 255, 0.3);
             -webkit-appearance: none;
         }
 
         .calc-button:active {
             background: #358cd8;
-            transform: translateY(2px);
-            box-shadow: 0 2px 6px rgba(76, 154, 255, 0.2);
+            transform: translateY(1px);
         }
 
         /* Results Section */
         .results-section {
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .subheading {
-            font-size: 16px;
+            font-size: 14px;
             color: #bbbbbb;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-align: center;
         }
 
         .results-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 8px;
             width: 100%;
         }
 
         .result-box {
-            padding: 12px 8px;
+            padding: 8px 5px;
             background: #333;
-            border-radius: 12px;
+            border-radius: 6px;
             text-align: center;
-            transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .result-box:active {
-            background: #444;
-        }
-
         .result-label {
-            font-size: 12px;
+            font-size: 10px;
             color: #bbbbbb;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .result-value {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: bold;
             color: #fff;
         }
@@ -157,17 +153,30 @@
             -moz-appearance: textfield;
         }
         
-        /* Vibration effect for results */
-        @keyframes vibrate {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-2px); }
-            50% { transform: translateX(2px); }
-            75% { transform: translateX(-2px); }
-            100% { transform: translateX(0); }
-        }
-        
-        .vibrate {
-            animation: vibrate 0.3s ease;
+        /* Compact layout for very small screens */
+        @media (max-height: 500px) {
+            .heading {
+                font-size: 18px;
+                margin: 2px 0;
+            }
+            
+            .input-row {
+                margin-bottom: 5px;
+            }
+            
+            input {
+                height: 30px;
+                padding: 5px 8px;
+            }
+            
+            .calc-button {
+                height: 32px;
+                margin: 5px 0;
+            }
+            
+            .result-value {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -177,23 +186,23 @@
         <h2 class="heading">Unit Calculator</h2>
 
         <div class="form-section">
-            <div class="form-group">
-                <label class="form-label" for="totalAmount">Total Amount</label>
-                <input type="number" id="totalAmount" placeholder="Enter total budget" inputmode="decimal">
+            <div class="input-row">
+                <div class="input-label">Total Amount:</div>
+                <input type="number" id="totalAmount" placeholder="Enter total" inputmode="decimal">
             </div>
             
-            <div class="form-group">
-                <label class="form-label" for="priceA1">A1 Price (55% allocation)</label>
+            <div class="input-row">
+                <div class="input-label">A1 Price (55%):</div>
                 <input type="number" id="priceA1" placeholder="Price per unit" inputmode="decimal">
             </div>
             
-            <div class="form-group">
-                <label class="form-label" for="priceA2">A2 Price (30% allocation)</label>
+            <div class="input-row">
+                <div class="input-label">A2 Price (30%):</div>
                 <input type="number" id="priceA2" placeholder="Price per unit" inputmode="decimal">
             </div>
             
-            <div class="form-group">
-                <label class="form-label" for="priceA3">A3 Price (15% allocation)</label>
+            <div class="input-row">
+                <div class="input-label">A3 Price (15%):</div>
                 <input type="number" id="priceA3" placeholder="Price per unit" inputmode="decimal">
             </div>
         </div>
@@ -278,14 +287,7 @@
             // Update result boxes
             const resultIds = ["unitsA1", "unitsA2", "unitsA3"];
             resultIds.forEach((id, i) => {
-                const element = document.getElementById(id);
-                element.textContent = units[i].toFixed(2);
-                
-                // Add vibrate effect
-                element.parentElement.classList.add("vibrate");
-                setTimeout(() => {
-                    element.parentElement.classList.remove("vibrate");
-                }, 300);
+                document.getElementById(id).textContent = units[i].toFixed(2);
             });
         }
     </script>
