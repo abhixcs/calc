@@ -4,135 +4,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mobile Unit Calculator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* General Reset */
-        body, html {
+        * {
             margin: 0;
-            padding: 12px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
             height: 100%;
             font-family: 'IBM Plex Mono', monospace;
             background: #121212;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             color: #fff;
+            overflow-x: hidden;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* Container styles */
         .container {
             width: 100%;
-            height: 100%;
-            padding: 15px; /* 15px padding around the screen */
-            box-sizing: border-box;
+            min-height: 100%;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            gap: 16px;
         }
 
         /* Title */
-        h2.heading {
-            font-size: 8vw;
+        .heading {
+            font-size: 28px;
             text-align: center;
             font-weight: bold;
             color: #ffffff;
-            margin-bottom: 4vh;
+            margin: 10px 0 20px;
         }
 
-        /* Input Fields */
-        input, button {
+        /* Form Group */
+        .form-group {
+            margin-bottom: 12px;
             width: 100%;
-            padding: 5vw;
-            font-size: 5vw;
-            margin-bottom: 4vh;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            text-align: center;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            color: #bbbbbb;
+            margin-bottom: 6px;
+        }
+
+        /* Input Fields with floating labels */
+        .input-container {
+            position: relative;
+            margin-bottom: 16px;
         }
 
         input {
+            width: 100%;
+            padding: 16px;
+            font-size: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             background: #222;
             color: #fff;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
         }
 
         input:focus {
-            background: #333;
+            outline: none;
             border-color: #4c9aff;
+            background: #333;
         }
 
-        /* Blue Calculate Button */
-        button {
-            background: #4c9aff; /* Blue background */
+        /* Button */
+        .calc-button {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            background: #4c9aff;
             color: #fff;
             border: none;
+            border-radius: 12px;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s ease;
+            margin: 10px 0 20px;
+            box-shadow: 0 4px 12px rgba(76, 154, 255, 0.3);
+            -webkit-appearance: none;
         }
 
-        button:hover {
-            background: #358cd8; /* Darker blue on hover */
+        .calc-button:active {
+            background: #358cd8;
+            transform: translateY(2px);
+            box-shadow: 0 2px 6px rgba(76, 154, 255, 0.2);
         }
 
-        /* Result Boxes */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4vw;
-            width: 100%;
-            margin-top: 4vh;
-        }
-
-        .result-box {
-            padding: 5vw;
-            background: #333;
-            border-radius: 12px;
-            font-size: 6vw;
-            font-weight: bold;
-            text-align: center;
-            color: #fff;
-            transition: all 0.3s ease;
-        }
-
-        .result-box:hover {
-            background: #444;
+        /* Results Section */
+        .results-section {
+            margin-top: 10px;
         }
 
         .subheading {
-            font-size: 4vw;
+            font-size: 16px;
             color: #bbbbbb;
-            margin-top: 4vh;
+            margin-bottom: 12px;
             text-align: center;
         }
 
-        /* Responsive Design */
-        @media (max-width: 375px) {
-            h2.heading {
-                font-size: 8vw;
-                margin-bottom: 5vh;
-            }
-
-            input, button {
-                font-size: 6vw;
-                padding: 6vw;
-                margin-bottom: 5vh;
-            }
-
-            .result-box {
-                font-size: 7vw;
-                padding: 5vw;
-            }
-
-            .grid {
-                gap: 4vw;
-            }
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 100%;
         }
 
+        .result-box {
+            padding: 12px 8px;
+            background: #333;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .result-box:active {
+            background: #444;
+        }
+
+        .result-label {
+            font-size: 12px;
+            color: #bbbbbb;
+            margin-bottom: 4px;
+        }
+
+        .result-value {
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Input number styling */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        /* Vibration effect for results */
+        @keyframes vibrate {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            50% { transform: translateX(2px); }
+            75% { transform: translateX(-2px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .vibrate {
+            animation: vibrate 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -140,35 +176,80 @@
     <div class="container">
         <h2 class="heading">Unit Calculator</h2>
 
-        <div>
-            <input type="number" id="totalAmount" placeholder="Total Amount">
-            <input type="number" id="priceA1" placeholder="Price of A1">
-            <input type="number" id="priceA2" placeholder="Price of A2">
-            <input type="number" id="priceA3" placeholder="Price of A3">
+        <div class="form-section">
+            <div class="form-group">
+                <label class="form-label" for="totalAmount">Total Amount</label>
+                <input type="number" id="totalAmount" placeholder="Enter total budget" inputmode="decimal">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="priceA1">A1 Price (55% allocation)</label>
+                <input type="number" id="priceA1" placeholder="Price per unit" inputmode="decimal">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="priceA2">A2 Price (30% allocation)</label>
+                <input type="number" id="priceA2" placeholder="Price per unit" inputmode="decimal">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="priceA3">A3 Price (15% allocation)</label>
+                <input type="number" id="priceA3" placeholder="Price per unit" inputmode="decimal">
+            </div>
         </div>
 
-        <button onclick="calculate()">Calculate</button>
+        <button class="calc-button" id="calculateButton">CALCULATE</button>
 
-        <div class="mt-6">
+        <div class="results-section">
             <h3 class="subheading">Units You Can Buy</h3>
-            <div class="grid">
+            <div class="results-grid">
                 <div class="result-box">
-                    <p class="text-xs text-gray-400">A1 (55%)</p>
-                    <p id="unitsA1">0</p>
+                    <p class="result-label">A1 (55%)</p>
+                    <p class="result-value" id="unitsA1">0</p>
                 </div>
                 <div class="result-box">
-                    <p class="text-xs text-gray-400">A2 (30%)</p>
-                    <p id="unitsA2">0</p>
+                    <p class="result-label">A2 (30%)</p>
+                    <p class="result-value" id="unitsA2">0</p>
                 </div>
                 <div class="result-box">
-                    <p class="text-xs text-gray-400">A3 (15%)</p>
-                    <p id="unitsA3">0</p>
+                    <p class="result-label">A3 (15%)</p>
+                    <p class="result-value" id="unitsA3">0</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up event listeners
+            document.getElementById("calculateButton").addEventListener("click", calculate);
+            
+            // Add keyboard support
+            document.addEventListener("keyup", function(event) {
+                if (event.key === "Enter") {
+                    calculate();
+                }
+            });
+            
+            // Auto-focus first field
+            document.getElementById("totalAmount").focus();
+            
+            // Set up input fields to move to next field
+            const inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach((input, index) => {
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        } else {
+                            calculate();
+                        }
+                    }
+                });
+            });
+        });
+
         function calculate() {
             let totalAmount = parseFloat(document.getElementById("totalAmount").value);
             let priceA1 = parseFloat(document.getElementById("priceA1").value);
@@ -176,15 +257,35 @@
             let priceA3 = parseFloat(document.getElementById("priceA3").value);
 
             if ([totalAmount, priceA1, priceA2, priceA3].some(val => isNaN(val) || val <= 0)) {
-                alert("Enter valid numbers.");
+                alert("Please enter valid positive numbers for all fields.");
                 return;
             }
 
-            let amounts = [totalAmount * 0.55, totalAmount * 0.30, totalAmount * 0.15];
-            let units = [amounts[0] / priceA1, amounts[1] / priceA2, amounts[2] / priceA3];
+            // Calculate allocation amounts based on percentages
+            let amounts = [
+                totalAmount * 0.55, 
+                totalAmount * 0.30, 
+                totalAmount * 0.15
+            ];
+            
+            // Calculate units
+            let units = [
+                amounts[0] / priceA1, 
+                amounts[1] / priceA2, 
+                amounts[2] / priceA3
+            ];
 
-            ["unitsA1", "unitsA2", "unitsA3"].forEach((id, i) => {
-                document.getElementById(id).textContent = units[i].toFixed(2);
+            // Update result boxes
+            const resultIds = ["unitsA1", "unitsA2", "unitsA3"];
+            resultIds.forEach((id, i) => {
+                const element = document.getElementById(id);
+                element.textContent = units[i].toFixed(2);
+                
+                // Add vibrate effect
+                element.parentElement.classList.add("vibrate");
+                setTimeout(() => {
+                    element.parentElement.classList.remove("vibrate");
+                }, 300);
             });
         }
     </script>
